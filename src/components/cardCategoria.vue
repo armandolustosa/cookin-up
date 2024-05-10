@@ -12,25 +12,30 @@
 
     <ul class="categoria__ingredientes">
       <li v-for="ingrediente in categoria.ingredientes" :key="ingrediente">
-        <Tag :texto="ingrediente" />
+        <IngredienteSelecionavel :ingrediente="ingrediente"
+        @adicionar-ingrediente="$emit('adicionarIngrediente', $event)" />
       </li>
     </ul>
   </article>
 </template>
 
 <script lang="ts">
-import { PropType } from "vue";
-import ICategoria from "../interfaces/ICategoria";
+import type { PropType } from "vue";
+import type ICategoria from "../interfaces/ICategoria";
 import Tag from "./Tag.vue";
+import IngredienteSelecionavel from "./IngredienteSelecionavel.vue";
 
 export default {
-  name: "cadCategoria",
+  name: "CardCategoria",
   components: {
     Tag,
+    IngredienteSelecionavel,
   },
   props: {
+    ingrediente: { type: String, required: true },
     categoria: { type: Object as PropType<ICategoria>, required: true },
   },
+  emits: ['adicionarIngrediente'],
 };
 </script>
 

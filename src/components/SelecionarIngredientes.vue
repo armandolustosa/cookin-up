@@ -8,7 +8,9 @@
 
     <ul class="categorias">
       <li v-for="categoria in categorias" :key="categoria.nome">
-        <cardCategoria :categoria="categoria" />
+        <cardCategoria :categoria="categoria" 
+        @adicionar-ingrediente="$emit('adicionarIngrediente', $event)"
+        />
       </li>
     </ul>
 
@@ -20,14 +22,14 @@
 
 <script lang="ts">
 import { obterCategorias } from "../http/index";
-import cardCategoria from "./cardCategoria.vue";
+import CardCategoria from "./CardCategoria.vue";
 
 import type ICategoria from "../interfaces/ICategoria";
 
 export default {
   name: "SelecionarIngredientes",
   components: {
-    cardCategoria,
+    CardCategoria,
   },
   data() {
     return {
@@ -37,6 +39,7 @@ export default {
   async created() {
     this.categorias = await obterCategorias();
   },
+  emits: ['adicionarIngrediente']
 };
 </script>
 

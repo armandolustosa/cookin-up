@@ -1,7 +1,7 @@
 <template>
   <main class="conteudo-principal">
-    <SuaLista :ingredientes="ingredientes"/>
-    <SelecionarIngredientes />
+    <SuaLista :ingredientes="ingredientes" />
+    <SelecionarIngredientes @adicionar-ingrediente="adicionarIngrediente" />
   </main>
 </template>
 
@@ -17,8 +17,13 @@ export default {
   },
   data() {
     return {
-      ingredientes: ["Alho", "Manteiga", "Orégano"],
+      ingredientes: [] as string[],
     };
+  },
+  methods: {
+    adicionarIngrediente(ingrediente: string) {
+        this.ingredientes.push(ingrediente);
+    },
   },
 };
 </script>
