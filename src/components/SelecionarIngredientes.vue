@@ -8,8 +8,10 @@
 
     <ul class="categorias">
       <li v-for="categoria in categorias" :key="categoria.nome">
-        <cardCategoria :categoria="categoria" 
-        @adicionar-ingrediente="$emit('adicionarIngrediente', $event)"
+        <CardCategoria
+          :categoria="categoria"
+          @adicionar-ingrediente="$emit('adicionarIngrediente', $event)"
+          @remover-ingrediente="$emit('removerIngrediente', $event)"
         />
       </li>
     </ul>
@@ -17,6 +19,8 @@
     <p class="paragrafo dica">
       *Atenção: consideramos que você tem em casa sal, pimenta e água.
     </p>
+
+    <BotaoPrincipal texto="Buscar receitas!" @click="$emit('alternarPagina')" />
   </section>
 </template>
 
@@ -26,10 +30,13 @@ import CardCategoria from "./CardCategoria.vue";
 
 import type ICategoria from "../interfaces/ICategoria";
 
+import BotaoPrincipal from "./BotaoPrincipal.vue";
+
 export default {
   name: "SelecionarIngredientes",
   components: {
     CardCategoria,
+    BotaoPrincipal,
   },
   data() {
     return {
@@ -39,7 +46,7 @@ export default {
   async created() {
     this.categorias = await obterCategorias();
   },
-  emits: ['adicionarIngrediente']
+  emits: ["adicionarIngrediente", "removerIngrediente", "alternarPagina"],
 };
 </script>
 

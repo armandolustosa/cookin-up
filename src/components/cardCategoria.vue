@@ -3,7 +3,7 @@
     <header class="categoria__cabecalho">
       <img
         :src="`/imagens/icones/categorias_ingredientes/${categoria.imagem}`"
-        alt=""
+        :alt="`Ícone de ${categoria.imagem}`"
         class="categoria__imagem"
       />
 
@@ -12,8 +12,11 @@
 
     <ul class="categoria__ingredientes">
       <li v-for="ingrediente in categoria.ingredientes" :key="ingrediente">
-        <IngredienteSelecionavel :ingrediente="ingrediente"
-        @adicionar-ingrediente="$emit('adicionarIngrediente', $event)" />
+        <IngredienteSelecionavel
+          :ingrediente="ingrediente"
+          @adicionar-ingrediente="$emit('adicionarIngrediente', $event)"
+          @remover-ingrediente="$emit('removerIngrediente', $event)"
+        />
       </li>
     </ul>
   </article>
@@ -32,10 +35,9 @@ export default {
     IngredienteSelecionavel,
   },
   props: {
-    ingrediente: { type: String, required: true },
     categoria: { type: Object as PropType<ICategoria>, required: true },
   },
-  emits: ['adicionarIngrediente'],
+  emits: ["adicionarIngrediente", "removerIngrediente"],
 };
 </script>
 

@@ -4,9 +4,7 @@
 
     <ul v-if="ingredientes.length" class="ingredientes-sua-lista">
       <li v-for="ingrediente in ingredientes" :key="ingrediente">
-        <button @click="aoRemover">
-          <Tag :texto="ingrediente" ativa class="item-na-lista"/>
-        </button>
+          <Tag :texto="ingrediente" ativa />
       </li>
     </ul>
 
@@ -32,20 +30,10 @@ export default {
   components: {
     Tag,
   },
-  methods: {
-    aoRemover() {
-      this.$emit("removerIngrediente", this.ingredientes)
-    }
-  },
-  emits: ["removerIngrediente"]
 };
 </script>
 
 <style scoped>
-.item-na-lista {
-  cursor: pointer;
-}
-
 .sua-lista-texto {
   color: var(--coral, #f0633c);
 
