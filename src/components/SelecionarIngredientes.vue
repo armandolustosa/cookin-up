@@ -7,7 +7,9 @@
     </p>
 
     <ul class="categorias">
+      <!-- Para cada categoria em 'categorias', renderiza um item de lista -->
       <li v-for="categoria in categorias" :key="categoria.nome">
+        <!-- Componente CardCategoria que representa uma categoria de ingredientes -->
         <CardCategoria
           :categoria="categoria"
           @adicionar-ingrediente="$emit('adicionarIngrediente', $event)"
@@ -20,17 +22,16 @@
       *Atenção: consideramos que você tem em casa sal, pimenta e água.
     </p>
 
+    <!-- Botão que emite um evento para alternar a página -->
     <BotaoPrincipal texto="Buscar receitas!" @click="$emit('alternarPagina')" />
   </section>
 </template>
 
 <script lang="ts">
-import { obterCategorias } from "../http/index";
-import CardCategoria from "./CardCategoria.vue";
-
-import type ICategoria from "../interfaces/ICategoria";
-
-import BotaoPrincipal from "./BotaoPrincipal.vue";
+import { obterCategorias } from "../http/index"; // Importa a função assíncrona para obter categorias de ingredientes por requisição http
+import CardCategoria from "./CardCategoria.vue"; // Importa o componente CardCategoria
+import type ICategoria from "../interfaces/ICategoria"; // Importa o tipo ICategoria
+import BotaoPrincipal from "./BotaoPrincipal.vue"; // Importa o componente BotaoPrincipal
 
 export default {
   name: "SelecionarIngredientes",
@@ -40,13 +41,14 @@ export default {
   },
   data() {
     return {
-      categorias: [] as ICategoria[],
+      categorias: [] as ICategoria[], // Inicializa a lista de categorias como um array vazio do tipo ICategoria
     };
   },
   async created() {
+    // Obtém as categorias de ingredientes quando o componente é criado
     this.categorias = await obterCategorias();
   },
-  emits: ["adicionarIngrediente", "removerIngrediente", "alternarPagina"],
+  emits: ["adicionarIngrediente", "removerIngrediente", "alternarPagina"], // Declara os eventos emitidos pelo componente
 };
 </script>
 

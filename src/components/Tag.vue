@@ -1,14 +1,17 @@
 <template>
+  <!-- Renderiza um span com a classe "tag" e uma classe condicional "ativa" se a prop ativa for verdadeira -->
   <span class="tag" :class="{ ativa }">
+    <!-- Exibe o texto passado através da prop "texto" -->
     {{ texto }}
   </span>
-</template> 
+</template>
 
 <script lang="ts">
 export default {
-  name: "Tag",
   props: {
+    // A prop 'texto' é uma string obrigatória
     texto: { type: String, required: true },
+    // A prop 'ativa' é um booleano
     ativa: Boolean,
   },
 };

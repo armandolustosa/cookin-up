@@ -1,17 +1,21 @@
 <template>
   <main class="conteudo-principal">
+    <!-- Componente que exibe a lista de ingredientes -->
     <SuaLista :ingredientes="ingredientes" />
+
+    <!-- KeepAlive mantém o estado dos componentes SelecionarIngredientes e MostrarReceitas enquanto alternamos entre eles -->
     <KeepAlive include="SelecionarIngredientes">
-      <SelecionarIngredientes v-if="conteudo === 'SelecionarIngredientes'"
-        @adicionar-ingrediente="adicionarIngrediente"
-        @remover-ingrediente="removerIngrediente"
-        @alternar-pagina="alternarPagina('MostrarReceitas')"
-      />
-  
-      <MostrarReceitas v-else-if="conteudo === 'MostrarReceitas'"
-        :ingredientes="ingredientes"
-        @alternar-pagina="alternarPagina('SelecionarIngredientes')"
-      />
+        <SelecionarIngredientes
+          v-if="conteudo === 'SelecionarIngredientes'"
+          @adicionar-ingrediente="adicionarIngrediente"
+          @remover-ingrediente="removerIngrediente"
+          @alternar-pagina="alternarPagina('MostrarReceitas')"
+        />
+        <MostrarReceitas
+          v-else-if="conteudo === 'MostrarReceitas'"
+          :ingredientes="ingredientes"
+          @alternar-pagina="alternarPagina('SelecionarIngredientes')"
+        />
     </KeepAlive>
   </main>
 </template>
@@ -32,17 +36,22 @@ export default {
   },
   data() {
     return {
-      ingredientes: [] as string[],
-      conteudo: "SelecionarIngredientes" as Pagina,
+      ingredientes: [] as string[], // Lista de ingredientes inicialmente vazia
+      conteudo: "SelecionarIngredientes" as Pagina, // 'SelecionarIngredientes' está definido como type Pagina
     };
   },
   methods: {
+    // Adiciona um ingrediente à lista
     adicionarIngrediente(ingrediente: string) {
       this.ingredientes.push(ingrediente);
     },
+    // Remove um ingrediente da lista
     removerIngrediente(ingrediente: string) {
-      this.ingredientes = this.ingredientes.filter((iLista) => ingrediente !== iLista);
+      this.ingredientes = this.ingredientes.filter(
+        (iLista) => ingrediente !== iLista
+      );
     },
+    // Alterna entre as páginas 'SelecionarIngredientes' e 'MostrarReceitas'
     alternarPagina(pagina: Pagina) {
       this.conteudo = pagina;
     },

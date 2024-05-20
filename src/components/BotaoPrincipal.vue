@@ -1,13 +1,17 @@
 <template>
-  <button class="paragrafo-lg botao-principal">{{ texto }}</button>
+  <!-- Renderiza um botão com as classes "paragrafo-lg" e "botao-principal" -->
+  <button class="paragrafo-lg botao-principal">
+    <!-- Exibe o texto passado através da prop "texto" -->
+    {{ texto }}
+  </button>
 </template>
 
 <script lang="ts">
 export default {
-  name: "BotaoPrincipal",
   props: {
+    // A prop 'texto' é uma string obrigatória
     texto: { type: String, required: true },
-  }
+  },
 };
 </script>
 

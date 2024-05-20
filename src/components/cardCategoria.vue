@@ -1,16 +1,22 @@
 <template>
+  <!-- Artigo representando uma categoria de ingredientes -->
   <article class="categoria">
+    <!-- Cabeçalho da categoria -->
     <header class="categoria__cabecalho">
+      <!-- Imagem da categoria -->
       <img
         :src="`/imagens/icones/categorias_ingredientes/${categoria.imagem}`"
         :alt="`Ícone de ${categoria.imagem}`"
         class="categoria__imagem"
       />
 
+      <!-- Nome da categoria -->
       <h2 class="paragrafo-lg categoria__nome">{{ categoria.nome }}</h2>
     </header>
 
+    <!-- Lista de ingredientes da categoria -->
     <ul class="categoria__ingredientes">
+      <!-- Para cada ingrediente na categoria, renderiza um componente IngredienteSelecionavel -->
       <li v-for="ingrediente in categoria.ingredientes" :key="ingrediente">
         <IngredienteSelecionavel
           :ingrediente="ingrediente"
@@ -23,10 +29,10 @@
 </template>
 
 <script lang="ts">
-import type { PropType } from "vue";
-import type ICategoria from "../interfaces/ICategoria";
-import Tag from "./Tag.vue";
-import IngredienteSelecionavel from "./IngredienteSelecionavel.vue";
+import type { PropType } from "vue"; // Importa PropType para definir tipos das props
+import type ICategoria from "../interfaces/ICategoria"; // Importa o tipo ICategoria
+import Tag from "./Tag.vue"; // Importa o componente Tag
+import IngredienteSelecionavel from "./IngredienteSelecionavel.vue"; // Importa o componente IngredienteSelecionavel
 
 export default {
   name: "CardCategoria",
@@ -35,8 +41,10 @@ export default {
     IngredienteSelecionavel,
   },
   props: {
+    // Define a prop 'categoria' como um objeto do tipo ICategoria obrigatório
     categoria: { type: Object as PropType<ICategoria>, required: true },
   },
+  // Declara os eventos emitidos pelo componente
   emits: ["adicionarIngrediente", "removerIngrediente"],
 };
 </script>

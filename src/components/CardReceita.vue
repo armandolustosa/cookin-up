@@ -1,6 +1,9 @@
 <template>
+  <!-- Artigo representando uma receita -->
   <article class="receita">
+    <!-- Cabeçalho da receita -->
     <header class="receita__cabecalho">
+      <!-- Imagem da receita -->
       <img
         class="receita__imagem"
         :src="`/imagens/receitas/${receita.imagem}`"
@@ -8,7 +11,9 @@
       />
     </header>
 
+    <!-- Corpo da receita -->
     <section class="receita__corpo">
+      <!-- Nome da receita -->
       <h2 class="paragrafo receita__nome">
         {{ receita.nome }}
       </h2>
@@ -17,11 +22,12 @@
 </template>
 
 <script lang="ts">
-import type IReceitas from "../interfaces/IReceitas";
-import type { PropType } from "vue";
+import type IReceitas from "../interfaces/IReceitas"; // Importa o tipo IReceitas
+import type { PropType } from "vue"; // Importa PropType para definir tipos das props
 
 export default {
   props: {
+    // Define a prop 'receita' como um objeto do tipo IReceitas obrigatório
     receita: { type: Object as PropType<IReceitas>, required: true },
   },
 };
