@@ -29,7 +29,7 @@
 
 <script lang="ts">
 import { obterCategorias } from "../http/index"; // Importa a função assíncrona para obter categorias de ingredientes por requisição http
-import CardCategoria from "../components/CardCategoria.vue";
+import CardCategoria from "./CardCategoria.vue";
 // Importa o componente CardCategoria
 import type ICategoria from "../interfaces/ICategoria"; // Importa o tipo ICategoria
 import BotaoPrincipal from "./BotaoPrincipal.vue"; // Importa o componente BotaoPrincipal
